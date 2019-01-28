@@ -1,0 +1,149 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Air Liquide FROSTAL® - List of projects</title>
+
+<!--  reference our style sheet -->
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css" />
+
+
+</head>
+
+<body>
+
+<!-- checking if logged in -->
+
+<% 
+
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+
+response.setHeader("Expires", "0"); // Proxies
+
+if(session.getAttribute("username")==null){
+	response.sendRedirect("/frostal/index.jsp");
+} %>
+
+<!-- Logout button -->
+
+<form action="logout">
+<input type="submit" value="Logout">
+</form>
+
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>FROSTAL - CRYOGENIC PROJECTS MANAGER</h2>
+		</div>
+	</div>
+
+	<div id="container">
+		<div id="content">
+
+			<!-- put new button: Add Project -->
+			<input type="button" value="Add Project" 
+			onclick="window.location.href='showFormForAdd'; return false;" 
+			class="add-button"
+			/>
+			
+			<!--  add a search box -->
+            <form:form action="search" method="POST">
+                Search project: <input type="text" name="theSearchName" />
+                
+                <input type="submit" value="Search" class="add-button" />
+            </form:form>
+			
+			<!--  add out html table here -->
+			<table>
+				<tr>
+					<th>Company Name</th>
+					<th>Company Address</th>
+					<th>Product Name</th>
+					<th>Production (kG/h)</th>
+					<th>Production (h/day)</th>
+					<th>Production (days/year)</th>
+					<th>Startups (per year)</th>
+					<th>Annual Production</th>
+					<th>Water Content</th>
+					<th>Fat Content</th>
+					<th>Dry Matter Content</th>
+					<th>Infeed Temperature</th>
+					<th>Outfeed Temperature</th>
+					<th>Temperature Difference</th>
+					<th>Product Length</th>
+					<th>Clearance (length)</th>
+					<th>Product Width</th>
+					<th>Clearance (width)</th>
+					<th>Product Height</th>
+					<th>Product Weight</th>
+					<th>Estimated Retention Time</th>
+					<th>Action</th>
+				</tr>
+
+				<!-- loop over and print out projects -->
+				<c:forEach var="tempProjects" items="${projects}">
+				
+				<!-- construct an "update" link with project id -->
+				<c:url var="updateLink" value="/projects/showFormForUpdate">
+				<c:param name="projectId" value="${tempProjects.id}"/>
+				</c:url>
+				
+				<!-- construct an "delete" link with project id -->
+				<c:url var="deleteLink" value="/projects/delete">
+				<c:param name="projectId" value="${tempProjects.id}"/>
+				</c:url>
+				
+					<tr>
+						<td>${tempProjects.company_name}</td>
+						<td>${tempProjects.company_address}</td>
+						<td>${tempProjects.product_name}</td>
+						<td>${tempProjects.production_kg_per_h}</td>
+						<td>${tempProjects.production_hours_per_day}</td>
+						<td>${tempProjects.production_days_per_year}</td>
+						<td>${tempProjects.startups_per_year}</td>
+						<td>${tempProjects.annual_production}</td>
+						<td>${tempProjects.water_con}</td>
+						<td>${tempProjects.fat_con}</td>
+						<td>${tempProjects.dryMatter_con}</td>
+						<td>${tempProjects.infeed_temp}</td>
+						<td>${tempProjects.outfeed_temp}</td>
+						<td>${tempProjects.temp_diff}</td>
+						<td>${tempProjects.product_length}</td>
+						<td>${tempProjects.clearance_length}</td>
+						<td>${tempProjects.product_width}</td>
+						<td>${tempProjects.clearance_width}</td>
+						<td>${tempProjects.product_heigth}</td>
+						<td>${tempProjects.product_weigth}</td>
+						<td>${tempProjects.est_ret_time}</td>
+						
+						<!-- display the update link -->
+						<td>
+						<a href="${updateLink}">Update</a>
+						|
+						<a href="${deleteLink}"
+						   onclick="if (!(confirm('Are you sure you want to delete this project?'))) return false">Delete</a>
+						</td>
+					</tr>
+
+				</c:forEach>
+
+			</table>
+
+
+		</div>
+
+	</div>
+
+
+</body>
+
+
+</html>

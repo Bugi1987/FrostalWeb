@@ -1,0 +1,62 @@
+*{margin:0; padding:0}
+body{
+	background-color: #fff;
+	padding-top: 10vh;
+}
+
+.form-container{
+	width:250px;
+	height: auto;
+	padding: 40px 30 px;
+	background-color: #4f6279;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 0 #000;
+	margin: auto;
+	position: relative;
+}
+
+.logo-img{
+	background:url('https://ocs-pl.oktawave.com/v1/AUTH_4e9ef52d-3acd-4c38-88cc-b3f63fd7884b/GP-pracodawcy/cache/profile_logo/17d/7f6/193a95dbde6afd6aefed64acad3611d0405951a562723031926c61c6e0.png') no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	
+	width: 280px;
+	height: 280px;
+	background-size: 100%
+	/*position: absolute;*/
+	top: 0;
+	left: 120px;
+}
+
+ul.list{
+	font-family: 'Roboto', sans-serif; 
+	list-style-type: none;
+	text-align: center;
+}
+
+ul.list li{
+	width: 250px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+ul.list li input{
+	width: 250px;
+	text-align: center;
+	padding: 8px 0px;
+	border: none;
+	background-color: #d3d3d3;
+	border-radius: 5px;
+}
+
+ul.list li input[type="button"]{
+	background-color: #fff;
+	color: #000000;
+	
+}
+
+ul.list li:nth-child(1){
+	color: white;
+	
+}
+
